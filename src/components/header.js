@@ -3,10 +3,10 @@ import { Menu, Segment } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { Link, IndexLink } from 'react-router'
 
- class Header extends Component {
-   constructor(props){
-     super(props);
-   }
+class Header extends Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     let { pathname } = this.props.location;
@@ -18,6 +18,7 @@ import { Link, IndexLink } from 'react-router'
             <Menu.Item header size='big'>Mission-Admission  🚀</Menu.Item>
             <IndexLink to="/"><Menu.Item name='My Words' active={'/' === pathname} /></IndexLink>
             <Link to="/add"><Menu.Item name='Add' active={'/add' === pathname} /></Link>
+            <Link to="/explore"><Menu.Item name='Explore Words' active={'/explore' === pathname} /></Link>
           </Menu>
         </Segment>
         <br/>

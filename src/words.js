@@ -88,11 +88,17 @@ In an impudent move, the defendant spoke out of order to say terribly insulting 
 
 let splitArray = x.split(/\n\n/g);
 let final = [];
-let y = splitArray.reduce((acc, set)=>{
+// let y = splitArray.reduce((acc, set)=>{
+//   let wordArray = set.split(/\n/g);
+//   // console.log({word: wordArray[0], meaning: wordArray[1], sentence:wordArray[2]});
+//   final.push({header: wordArray[0], meta: wordArray[1], description:wordArray[2]});
+//
+// },[]);
+splitArray.forEach((set)=>{
   let wordArray = set.split(/\n/g);
   // console.log({word: wordArray[0], meaning: wordArray[1], sentence:wordArray[2]});
   final.push({header: wordArray[0], meta: wordArray[1], description:wordArray[2]});
 
-},[]);
+});
 
 export default final;

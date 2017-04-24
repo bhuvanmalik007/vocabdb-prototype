@@ -1,9 +1,9 @@
 import React from 'react'
-import { Form, Input, Segment, Container, Button } from 'semantic-ui-react'
+import { Form, Segment, Container, Button } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 
 
-const AddWordForm = ({ handleSubmit }) => {
+let AddWordForm = ({ handleSubmit }) => {
   // const { handleSubmit } = props;
   return (
   <Container>

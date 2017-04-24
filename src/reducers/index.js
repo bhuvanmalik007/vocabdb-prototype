@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import fuelSavings from './fuelSavingsReducer';
 import wordsReducer from './wordReducer';
-import {routerReducer} from 'react-router-redux';
-import { reducer as formReducer } from 'redux-form'
+import globalSearchReducer from './globalSearchReducer';
+import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
-  wordsArray: wordsReducer,
+  wordsState: wordsReducer,
+  globalSearchState: globalSearchReducer,
   fuelSavings,
   routing: routerReducer,
   form: formReducer

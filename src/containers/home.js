@@ -1,21 +1,21 @@
 import React from 'react';
-import { Card, Segment, Container, Icon, Image } from 'semantic-ui-react'
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { Card, Segment, Container, Icon, Image, Search } from 'semantic-ui-react'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 
-const searchGoogle = (word)=>{
-  window.open('http://www.google.com?q=' + word, '_blank');
+const searchGoogle = (word) => {
+  window.open('http://www.google.com/search?q=' + word, '_blank');
 }
 
-const CardsMaker = ({deleteWord, wordsArray}) =>
+const CardsMaker = ({ deleteWord, wordsArray, searchString, filter }) =>
   <Card.Group itemsPerRow={4}>
     {wordsArray.map((element,id) =>
       <Card key={id}>
         <Card.Content>
           <Image floated='right'>
             <Icon  link name='google' onClick={()=>searchGoogle(element.header)} />
-            <Icon link name='close'   onClick={()=>deleteWord(id)} />
+            <Icon link name='close'   onClick={()=>deleteWord(element)} />
           </Image>
           <Card.Header>
             {element.header}
@@ -30,26 +30,38 @@ const CardsMaker = ({deleteWord, wordsArray}) =>
       </Card>)}
   </Card.Group>
 
-const HomePage = (props) => {
-  return (
-    <Container>
-      <Segment>
-        {/* <Card.Group itemsPerRow={4}> */}
-          <CardsMaker deleteWord={props.deleteWord} wordsArray={props.wordsArray}/>
 
+const HomePage = (props) => {
+  let handleSearchChange = (e, value) => {
+    props.filterWords(value);
+  }
+  return (
+    <div>
+      <Search
+        onSearchChange={handleSearchChange}
+        open={false}
+        icon='filter'
+        placeholder="Search your words.."
+        value={props.searchString}
+      />
+      <Segment>
+        <CardsMaker deleteWord={props.deleteWord} wordsArray={props.wordsArray} searchString={props.searchString} filter = {props.filterWords}/>
       </Segment>
-    </Container>)
+    </div>
+  )
 }
 
 function mapStateToProps(state) {
   return {
-    wordsArray: state.wordsArray
+    wordsArray: state.wordsState.filteredArray,
+    searchString: state.wordsState.searchString
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteWord: bindActionCreators(actions.deleteWord, dispatch)
+    deleteWord: bindActionCreators(actions.deleteWord, dispatch),
+    filterWords: bindActionCreators(actions.filterWords, dispatch)
   };
 }
 
@@ -57,6 +69,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(HomePage);
-
-
-// export default HomePage;
