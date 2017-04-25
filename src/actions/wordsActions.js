@@ -37,7 +37,6 @@ export function globalSearch(searchString) {
       }) &&
     fetch('http://owlbot.info/api/v1/dictionary/' + searchString.trim(), {
         method: 'get'
-        // 'mode': 'cors'
       })
       .then(response => response.json())
       .then(results => {
@@ -52,15 +51,11 @@ export function globalSearch(searchString) {
         });
       })
       .catch(function(err) {
+        console.log(err);
         dispatch({
           type: types.IS_LOADING,
           bool: false
         });
-        // dispatch({
-        //   type: types.GLOBAL_SEARCH,
-        //   results: [],
-        //   searchString
-        // });
       });
   };
 }
