@@ -2,16 +2,45 @@ import * as types from '../constants/actionTypes';
 
 
 export function addWord(wordObj) {
-  return {
-    type: types.ADD_WORD,
-    wordObj
+  return (dispatch) => {
+    fetch('http://localhost:3000/mywords/add', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(wordObj)
+      })
+      .then(result => result.json())
+      .then(({ success, data }) => {
+        if (success) {
+          dispatch({
+            type: types.ADD_WORD,
+            wordObj: data.wordObj
+          });
+          dispatch({
+            type: types.FILTER_WORDS,
+            wordObj
+          });
+        }
+      });
   };
 }
 
-export function deleteWord(wordObj) {
-  return {
-    type: types.DELETE_WORD,
-    wordObj
+export function deleteWord(id) {
+  return (dispatch) => {
+    fetch('http://localhost:3000/mywords/delete/' + id, { method: 'delete' })
+      .then(response => response.json())
+      .then((response) => {
+        response.success && dispatch({
+          type: types.DELETE_WORD,
+          id
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
   };
 }
 
@@ -31,11 +60,11 @@ export function updateGlobalSearchString(searchString) {
 
 export function globalSearch(searchString) {
   return (dispatch) => {
-      dispatch({
+    dispatch({
         type: types.IS_LOADING,
         bool: true
       }) &&
-    fetch('http://owlbot.info/api/v1/dictionary/' + searchString.trim(), {
+      fetch('http://localhost:3000/globalsearch/' + searchString.trim(), {
         method: 'get'
       })
       .then(response => response.json())
@@ -44,11 +73,11 @@ export function globalSearch(searchString) {
             type: types.IS_LOADING,
             bool: false
           }) &&
-        dispatch({
-          type: types.GLOBAL_SEARCH,
-          results,
-          searchString
-        });
+          dispatch({
+            type: types.GLOBAL_SEARCH,
+            results,
+            searchString
+          });
       })
       .catch(function(err) {
         console.log(err);
@@ -65,4 +94,32 @@ export function changeLoadingState(bool) {
     type: types.IS_LOADING,
     bool
   };
+}
+
+export function initState() {
+  return (dispatch) => {
+    fetch('http://localhost:3000/mywords', {
+        method: 'get'
+      })
+      .then(response => response.json())
+      .then(({ data }) => {
+        dispatch({
+          type: types.INIT_STATE,
+          data
+        });
+      })
+      .catch(function(err) {
+        console.log(err);
+        dispatch({
+          type: types.INIT_STATE,
+          data: []
+        });
+      });
+  };
+}
+
+export function resetGlobalSearchResults() {
+  return {
+    type: types.RESET_GLOBAL_SEARCH
+  }
 }

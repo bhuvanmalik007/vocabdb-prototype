@@ -10,7 +10,7 @@
     "remove-demo": "babel-node tools/removeDemo.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message",
-    "start": "npm-run-all --parallel test:watch open:src lint:watch",
+    "start": "npm-run-all open:src lint:watch",
     "open:src": "babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "lint": "esw webpack.config.* src tools --color",
@@ -30,6 +30,7 @@
   "author": "bhuvan malik",
   "license": "MIT",
   "dependencies": {
+    "animate.css": "3.5.2",
     "object-assign": "4.1.0",
     "react": "15.4.1",
     "react-dom": "15.4.1",

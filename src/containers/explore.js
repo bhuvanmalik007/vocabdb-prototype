@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Segment, Icon, Image, Search } from 'semantic-ui-react';
+import { Card, Segment, Icon, Image, Search, Popup } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
@@ -10,10 +10,13 @@ import PropTypes from 'prop-types';
 const CardsMaker = ({ searchResults, searchString, addWord, filterWords }) =>
   <Card.Group itemsPerRow={4}>
     {searchResults.map((element,id) =>
-      <Card key={id}>
+      <Card key={id} className="animated fadeIn">
         <Card.Content>
           <Image floated="right">
-            <Icon  link name="plus" onClick={()=>{addWord({header:searchString,meta:element.defenition,description:element.example});filterWords();}} />
+            <Popup
+              trigger={<Icon  link name="plus" onClick={()=>{addWord({word:searchString,meaning:element.defenition,example:element.example});filterWords();}} />}
+              content="Add to My Flashcards"
+            />
           </Image>
           <Card.Header>
             {searchString}
@@ -35,12 +38,13 @@ CardsMaker.propTypes = {
   filterWords: PropTypes.func
 }
 
-const Explore = ({ search, searchResults, searchString, addWord, filterWords, updateSearchString, isLoading }) => {
+const Explore = ({ search, searchResults, searchString, addWord, filterWords, updateSearchString, isLoading, resetGlobalSearchResults }) => {
   const handleSearchChange = (e, value) => {
     updateSearchString(value);
-    if (value.trim() != '') {
-      search(value);
-    }
+    value.trim() != '' ? search(value) : resetGlobalSearchResults();
+    // if (value.trim() != '') {
+    //   search(value);
+    // }
   }
   return (
     <div className="main-container">
@@ -54,7 +58,7 @@ const Explore = ({ search, searchResults, searchString, addWord, filterWords, up
       {searchResults.length!=0 && !isLoading && <Segment basic>
         <CardsMaker searchResults={searchResults} searchString={searchString} addWord={addWord} filterWords={filterWords} />
       </Segment>}
-      {((searchResults.length==0 || searchString.trim()=='') && !isLoading)  && <h1>No results found</h1>}
+      {((searchResults.length==0 && searchString.trim()!='') && !isLoading)  && <h1>No results found</h1>}
     </div>
   )
 }
@@ -66,7 +70,8 @@ Explore.propTypes = {
   addWord: PropTypes.func,
   filterWords: PropTypes.func,
   updateSearchString: PropTypes.func,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  resetGlobalSearchResults: PropTypes.func
 }
 
 
@@ -82,8 +87,9 @@ function mapDispatchToProps(dispatch) {
   return {
     updateSearchString: bindActionCreators(actions.updateGlobalSearchString, dispatch),
     search: (searchString) => actions.globalSearch(searchString)(dispatch),
-    addWord: bindActionCreators(actions.addWord, dispatch),
-    filterWords: bindActionCreators(actions.filterWords, dispatch)
+    addWord: (wordObj) => actions.addWord(wordObj)(dispatch),
+    filterWords: bindActionCreators(actions.filterWords, dispatch),
+    resetGlobalSearchResults: bindActionCreators(actions.resetGlobalSearchResults, dispatch)
   };
 }
 

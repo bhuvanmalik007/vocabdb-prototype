@@ -10,8 +10,6 @@ import * as types from '../constants/actionTypes';
 export default function wordsReducer(state = initialState.globalSearchState, action) {
   switch (action.type) {
     case types.GLOBAL_SEARCH:
-      // For this example, just simulating a save by changing date modified.
-      // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
       return { results: action.results, searchString: state.searchString, isLoading: false };
 
     case types.UPDATE_GLOBAL_SEARCH_STRING:
@@ -19,6 +17,9 @@ export default function wordsReducer(state = initialState.globalSearchState, act
 
     case types.IS_LOADING:
       return { results: state.results, searchString: state.searchString, isLoading: action.bool };
+
+    case types.RESET_GLOBAL_SEARCH:
+      return { results: [], searchString: state.searchString, isLoading: false };
 
     default:
       return state;

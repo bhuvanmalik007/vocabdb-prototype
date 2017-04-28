@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import routes from '../routes';
 import { Router } from 'react-router';
+import * as actions from '../actions/wordsActions';
 
-export default class Root extends Component {
+
+
+class Root extends Component {
+  componentDidMount() {
+    this.props.initState();
+  }
   render() {
     const { store, history } = this.props;
     return (
@@ -17,5 +23,21 @@ export default class Root extends Component {
 
 Root.propTypes = {
   store: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  initState: PropTypes.func
 };
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    initState: ()=>actions.initState()(dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Root);

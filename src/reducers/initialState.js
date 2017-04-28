@@ -1,9 +1,9 @@
-import wordsArray from '../words'
+// import wordsArray from '../words'
 
 export default {
   wordsState: {
-    wordsArray,
-    filteredArray: wordsArray,
+    wordsArray:[],
+    filteredArray: [],
     searchString: ''
   },
   globalSearchState: { results: [], searchString: '', isLoading: false },

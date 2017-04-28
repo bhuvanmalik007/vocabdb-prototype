@@ -1,20 +1,26 @@
 import AddWordForm from '../components/addWordForm';
 import React from 'react'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 import { push } from 'react-router-redux';
+import PropTypes from 'prop-types';
+
 
 
 const AddWord = ({ addWord, goToRoute }) => {
   const submit = (values) => {
     // Do something with the form values
-    addWord({ header: values.word, meta: values.meaning, description: values.sentence });
+    addWord({ word: values.word, meaning: values.meaning, example: values.sentence });
     goToRoute(push('/'));
   }
   return (
     <AddWordForm onSubmit={submit} />
   );
+}
+
+AddWord.propTypes = {
+  addWord: PropTypes.func,
+  goToRoute: PropTypes.func
 }
 
 function mapStateToProps(state) {
@@ -26,7 +32,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     goToRoute: (path) => dispatch(path),
-    addWord: bindActionCreators(actions.addWord, dispatch)
+    addWord: (wordObj) => actions.addWord(wordObj)(dispatch)
   };
 }
 

@@ -15,10 +15,10 @@ class Header extends Component {
       <div>
         <Segment inverted attached>
           <Menu inverted pointing secondary size="small" >
-            <Menu.Item header size="big">Mission-Admission  🚀</Menu.Item>
-            <IndexLink to="/"><Menu.Item name="My Words" active={'/' === pathname} /></IndexLink>
-            <Link to="/add"><Menu.Item name="Add" active={'/add' === pathname} /></Link>
-            <Link to="/explore"><Menu.Item name="Explore Words" active={'/explore' === pathname} /></Link>
+            <Menu.Item header size="big" className="animated zoomInDown">Mission-Admission  🚀</Menu.Item>
+            <IndexLink to="/" className="animated fadeInDown"><Menu.Item name="My Flashcards" active={'/' === pathname} /></IndexLink>
+            <Link to="/add" className="animated fadeInDown"><Menu.Item name="Add" active={'/add' === pathname} /></Link>
+            <Link to="/explore" className="animated fadeInDown"><Menu.Item name="Explore Words" active={'/explore' === pathname} /></Link>
           </Menu>
         </Segment>
         <br/>

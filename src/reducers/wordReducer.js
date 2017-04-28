@@ -9,15 +9,27 @@ import * as types from '../constants/actionTypes';
 // and update values on the copy.
 export default function wordsReducer(state = initialState.wordsState, action) {
   switch (action.type) {
+
+    case types.INIT_STATE:
+      return {
+        wordsArray: action.data,
+        filteredArray: action.data,
+        searchString: state.searchString
+      };
+
     case types.ADD_WORD:
       //console.log(action);
-      return { wordsArray: [action.wordObj, ...state.wordsArray], filteredArray: state.filteredArray, searchString: state.searchString };
+      return {
+        wordsArray: [action.wordObj, ...state.wordsArray],
+        filteredArray: state.filteredArray,
+        searchString: state.searchString
+      };
 
     case types.DELETE_WORD:
       //console.log(action);
       return {
-        wordsArray: state.wordsArray.filter(element => (action.wordObj.meta != element.meta) || (action.wordObj.header != element.header)),
-        filteredArray: state.filteredArray.filter(element => (action.wordObj.meta != element.meta) || (action.wordObj.header != element.header)),
+        wordsArray: state.wordsArray.filter(wordObj => wordObj._id != action.id),
+        filteredArray: state.filteredArray.filter(wordObj => wordObj._id != action.id),
         searchString: state.searchString
       };
 
@@ -25,7 +37,7 @@ export default function wordsReducer(state = initialState.wordsState, action) {
       //console.log(action);
       return {
         wordsArray: state.wordsArray,
-        filteredArray: state.wordsArray.filter(element => element.header.search(action.searchString) > -1),
+        filteredArray: state.wordsArray.filter(element => element.word.search(action.searchString) > -1),
         searchString: action.searchString
       };
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Card, Segment, Icon, Image, Search } from 'semantic-ui-react'
+import { Card, Segment, Icon, Image, Search, Popup } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 import PropTypes from 'prop-types';
 import '../styles/styles.scss';
+import Tooltip from 'rc-tooltip';
 
 
 const searchGoogle = (word) => {
@@ -14,20 +15,26 @@ const searchGoogle = (word) => {
 const CardsMaker = ({ deleteWord, wordsArray }) =>
   <Card.Group itemsPerRow={4}>
     {wordsArray.map((element,id) =>
-      <Card key={id}>
+      <Card key={id} className="animated fadeIn">
         <Card.Content>
           <Image floated="right">
-            <Icon  link name="google" onClick={()=>searchGoogle(element.header)} />
-            <Icon link name="close"   onClick={()=>deleteWord(element)} />
+            <Popup
+              trigger={<Icon  link name="google" onClick={()=>searchGoogle(element.word)} />}
+              content="Search this word on Google"
+            />
+            <Popup
+              trigger={<Icon link name="close"   onClick={()=>deleteWord(element._id)} />}
+              content="Delete Flashcard from your saved collection"
+            />
           </Image>
           <Card.Header>
-            {element.header}
+            {element.word}
           </Card.Header>
           <Card.Meta>
-            {element.meta}
+            {element.meaning}
           </Card.Meta>
           <Card.Description>
-            {element.description}
+            {element.example}
           </Card.Description>
         </Card.Content>
       </Card>)}
@@ -75,7 +82,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteWord: bindActionCreators(actions.deleteWord, dispatch),
+    deleteWord: (id)=>actions.deleteWord(id)(dispatch),
     filterWords: bindActionCreators(actions.filterWords, dispatch)
   };
 }
