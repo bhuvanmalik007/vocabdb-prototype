@@ -14,15 +14,17 @@ class Header extends Component {
     return (
       <div>
         <Segment inverted attached>
-          <Menu inverted pointing secondary size="small" >
-            <Menu.Item header size="big" className="animated zoomInDown">Mission-Admission  🚀</Menu.Item>
+          <Menu inverted pointing secondary size="large" stackable>
+            <Menu.Item header as="h3" className="animated zoomInDown">Mission-Admission  🚀</Menu.Item>
             <IndexLink to="/" className="animated fadeInDown"><Menu.Item name="My Flashcards" active={'/' === pathname} /></IndexLink>
             <Link to="/add" className="animated fadeInDown"><Menu.Item name="Add" active={'/add' === pathname} /></Link>
             <Link to="/explore" className="animated fadeInDown"><Menu.Item name="Explore Words" active={'/explore' === pathname} /></Link>
           </Menu>
         </Segment>
         <br/>
-        {this.props.children}
+        <div className="body">
+          {this.props.children}
+        </div>
       </div>
     )
   }

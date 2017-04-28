@@ -7,7 +7,7 @@ let AddWordForm = ({ handleSubmit }) => {
   // const { handleSubmit } = props;
   return (
   <Container>
-    <Segment>
+    <Segment raised padded className="animated fadeIn">
       <Form onSubmit={handleSubmit}>
         <Form.Field width={4}>
           <label>Word</label>

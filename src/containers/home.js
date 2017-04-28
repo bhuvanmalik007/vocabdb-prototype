@@ -53,11 +53,13 @@ const HomePage = ({ searchString, deleteWord, wordsArray, filterWords }) => {
   return (
     <div className="main-container">
       <Search
+        size="big"
         onSearchChange={handleSearchChange}
         open={false}
         icon="filter"
         placeholder="Search your words.."
         value={searchString}
+        className="animated fadeIn"
       />
       <Segment basic>
         <CardsMaker deleteWord={deleteWord} wordsArray={wordsArray} searchString={searchString} filter = {filterWords}/>
@@ -82,7 +84,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteWord: (id)=>actions.deleteWord(id)(dispatch),
+    deleteWord: (id) => actions.deleteWord(id)(dispatch),
     filterWords: bindActionCreators(actions.filterWords, dispatch)
   };
 }

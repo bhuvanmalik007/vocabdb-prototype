@@ -49,11 +49,13 @@ const Explore = ({ search, searchResults, searchString, addWord, filterWords, up
   return (
     <div className="main-container">
       <Search
+        size="big"
         onSearchChange={handleSearchChange}
         open={false}
         icon="search"
         value={searchString}
-        placeholder="Explore new words.."/>
+        placeholder="Explore new words.."
+        className="animated fadeIn"/>
       {isLoading && <Spinner spinnerName="three-bounce" />}
       {searchResults.length!=0 && !isLoading && <Segment basic>
         <CardsMaker searchResults={searchResults} searchString={searchString} addWord={addWord} filterWords={filterWords} />
