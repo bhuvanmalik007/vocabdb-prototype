@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Segment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link, IndexLink } from 'react-router';
+// import Toastr from '../containers/toastr'
 
 class Header extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Header extends Component {
         </Segment>
         <br/>
         <div className="body">
+          {/* <Toastr /> */}
           {this.props.children}
         </div>
       </div>

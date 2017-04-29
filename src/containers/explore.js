@@ -42,9 +42,6 @@ const Explore = ({ search, searchResults, searchString, addWord, filterWords, up
   const handleSearchChange = (e, value) => {
     updateSearchString(value);
     value.trim() != '' ? search(value) : resetGlobalSearchResults();
-    // if (value.trim() != '') {
-    //   search(value);
-    // }
   }
   return (
     <div className="main-container">

@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 import PropTypes from 'prop-types';
 import '../styles/styles.scss';
-import Tooltip from 'rc-tooltip';
 
 
 const searchGoogle = (word) => {

@@ -4,6 +4,8 @@ import { Provider, connect } from 'react-redux';
 import routes from '../routes';
 import { Router } from 'react-router';
 import * as actions from '../actions/wordsActions';
+import ReduxToastr from 'react-redux-toastr';
+
 
 
 
@@ -15,7 +17,16 @@ class Root extends Component {
     const { store, history } = this.props;
     return (
       <Provider store={store}>
-        <Router history={history} routes={routes} />
+        <div>
+          <ReduxToastr
+            timeOut={2000}
+            newestOnTop={false}
+            position="top-right"
+            transitionIn="fadeIn"
+            transitionOut="fadeOut"
+            progressBar/>
+          <Router history={history} routes={routes} />
+        </div>
       </Provider>
     );
   }

@@ -7,6 +7,7 @@ export default {
     searchString: ''
   },
   globalSearchState: { results: [], searchString: '', isLoading: false },
+  toastrState:{},
   fuelSavings: {
     newMpg: '',
     tradeMpg: '',
