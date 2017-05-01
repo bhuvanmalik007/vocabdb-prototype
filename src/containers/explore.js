@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 
 const CardsMaker = ({ searchResults, searchString, addWord, filterWords }) =>
-  <Card.Group itemsPerRow={4}>
+  <Card.Group itemsPerRow={2}>
     {searchResults.map((element,id) =>
       <Card key={id} className="animated fadeIn">
         <Card.Content>

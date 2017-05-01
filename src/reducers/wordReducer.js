@@ -14,7 +14,8 @@ export default function wordsReducer(state = initialState.wordsState, action) {
       return {
         wordsArray: action.data,
         filteredArray: action.data,
-        searchString: state.searchString
+        searchString: state.searchString,
+        isLoading:false
       };
 
     case types.ADD_WORD:

@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 import PropTypes from 'prop-types';
 import '../styles/styles.scss';
+import Spinner from 'react-spinkit';
+
 
 
 const searchGoogle = (word) => {
@@ -45,7 +47,7 @@ CardsMaker.propTypes = {
 }
 
 
-const HomePage = ({ searchString, deleteWord, wordsArray, filterWords }) => {
+const HomePage = ({ searchString, deleteWord, wordsArray, filterWords, isLoading }) => {
   let handleSearchChange = (e, value) => {
     filterWords(value);
   }
@@ -60,6 +62,7 @@ const HomePage = ({ searchString, deleteWord, wordsArray, filterWords }) => {
         value={searchString}
         className="animated fadeIn"
       />
+      {isLoading && <Spinner spinnerName="three-bounce" />}
       <Segment basic>
         <CardsMaker deleteWord={deleteWord} wordsArray={wordsArray} searchString={searchString} filter = {filterWords}/>
       </Segment>
@@ -71,13 +74,15 @@ HomePage.propTypes = {
   searchString: PropTypes.string,
   deleteWord: PropTypes.func,
   wordsArray: PropTypes.array,
-  filterWords: PropTypes.func
+  filterWords: PropTypes.func,
+  isLoading: PropTypes.bool
 }
 
 function mapStateToProps(state) {
   return {
     wordsArray: state.wordsState.filteredArray,
-    searchString: state.wordsState.searchString
+    searchString: state.wordsState.searchString,
+    isLoading: state.wordsState.isLoading
   };
 }
 

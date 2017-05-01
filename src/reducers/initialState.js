@@ -4,7 +4,8 @@ export default {
   wordsState: {
     wordsArray:[],
     filteredArray: [],
-    searchString: ''
+    searchString: '',
+    isLoading: true
   },
   globalSearchState: { results: [], searchString: '', isLoading: false },
   toastrState:{},

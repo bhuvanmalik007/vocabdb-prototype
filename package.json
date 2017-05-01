@@ -182,6 +182,7 @@
       "no-alert": 0,
       "no-lone-blocks": 0,
       "jsx-quotes": 1,
+      "caseSensitive": 0,
       "react/display-name": [
         1,
         {
