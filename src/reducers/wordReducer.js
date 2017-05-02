@@ -15,7 +15,8 @@ export default function wordsReducer(state = initialState.wordsState, action) {
         wordsArray: action.data,
         filteredArray: action.data,
         searchString: state.searchString,
-        isLoading:false
+        isLoading: false,
+        total: action.data.length
       };
 
     case types.ADD_WORD:
@@ -23,7 +24,8 @@ export default function wordsReducer(state = initialState.wordsState, action) {
       return {
         wordsArray: [action.wordObj, ...state.wordsArray],
         filteredArray: state.filteredArray,
-        searchString: state.searchString
+        searchString: state.searchString,
+        total: state.total + 1
       };
 
     case types.DELETE_WORD:
@@ -31,7 +33,8 @@ export default function wordsReducer(state = initialState.wordsState, action) {
       return {
         wordsArray: state.wordsArray.filter(wordObj => wordObj._id != action.id),
         filteredArray: state.filteredArray.filter(wordObj => wordObj._id != action.id),
-        searchString: state.searchString
+        searchString: state.searchString,
+        total: state.total - 1
       };
 
     case types.FILTER_WORDS:
@@ -39,7 +42,8 @@ export default function wordsReducer(state = initialState.wordsState, action) {
       return {
         wordsArray: state.wordsArray,
         filteredArray: state.wordsArray.filter(element => element.word.search(action.searchString) > -1),
-        searchString: action.searchString
+        searchString: action.searchString,
+        total: state.total
       };
 
     default:

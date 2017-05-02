@@ -22,7 +22,7 @@ const CardsMaker = ({ searchResults, searchString, addWord, filterWords }) =>
             {searchString}
           </Card.Header>
           <Card.Meta>
-            {element.defenition}
+            {element.meaning}
           </Card.Meta>
           <Card.Description>
             {element.example}

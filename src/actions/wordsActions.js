@@ -1,6 +1,4 @@
 import * as types from '../constants/actionTypes';
-import { bindActionCreators } from 'redux';
-import { actions as toastrActions } from 'react-redux-toastr';
 import toastrservice from '../futils/toastrservice';
 
 
@@ -114,8 +112,7 @@ export function initState() {
           data
         });
       })
-      .catch(function(err) {
-        console.log(err);
+      .catch(function() {
         dispatch({
           type: types.INIT_STATE,
           data: []
