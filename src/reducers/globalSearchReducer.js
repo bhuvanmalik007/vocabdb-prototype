@@ -19,7 +19,7 @@ export default function wordsReducer(state = initialState.globalSearchState, act
       return { results: state.results, searchString: state.searchString, isLoading: action.bool };
 
     case types.RESET_GLOBAL_SEARCH:
-      return { results: [], searchString: state.searchString, isLoading: false };
+      return { results: {words:[]}, searchString: state.searchString, isLoading: false };
 
     default:
       return state;

@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 import PropTypes from 'prop-types';
 import '../styles/styles.scss';
-import Spinner from 'react-spinkit';
 
 
 
@@ -62,7 +61,7 @@ const HomePage = ({ searchString, deleteWord, wordsArray, filterWords, isLoading
         value={searchString}
         className="animated fadeIn"
       />
-      {isLoading && <Spinner spinnerName="three-bounce" />}
+      {isLoading && <Icon loading size="huge" name="rocket" />}
       <Segment basic>
         <CardsMaker deleteWord={deleteWord} wordsArray={wordsArray} searchString={searchString} filter = {filterWords}/>
       </Segment>

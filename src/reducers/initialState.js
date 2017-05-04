@@ -8,7 +8,7 @@ export default {
     isLoading: true,
     total: 0
   },
-  globalSearchState: { results: [], searchString: '', isLoading: false },
+  globalSearchState: { results: {words:[]}, searchString: '', isLoading: false },
   toastrState:{},
   fuelSavings: {
     newMpg: '',
