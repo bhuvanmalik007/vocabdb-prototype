@@ -96,7 +96,8 @@ function mapStateToProps({ globalSearchState }) {
 function mapDispatchToProps(dispatch) {
   return {
     updateSearchString: bindActionCreators(actions.updateGlobalSearchString, dispatch),
-    search: (searchString) => actions.globalSearch(searchString)(dispatch),
+    search: bindActionCreators((searchString)=>({type:'PERFORM_GLOBAL_SEARCH',searchString}), dispatch),
+    // search: (searchString) => actions.globalSearch(searchString)(dispatch),
     addWord: (wordObj) => actions.addWord(wordObj)(dispatch),
     filterWords: bindActionCreators(actions.filterWords, dispatch),
     resetGlobalSearchResults: bindActionCreators(actions.resetGlobalSearchResults, dispatch)
