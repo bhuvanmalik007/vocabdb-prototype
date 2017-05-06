@@ -21,7 +21,7 @@ class Header extends Component {
             <IndexLink to="/" className="animated fadeInDown"><Menu.Item name="My Flashcards" active={'/' === pathname} /></IndexLink>
             <Link to="/add" className="animated fadeInDown"><Menu.Item name="Add" active={'/add' === pathname} /></Link>
             <Link to="/explore" className="animated fadeInDown"><Menu.Item name="Explore Words" active={'/explore' === pathname} /></Link>
-            <Menu.Item position="center"><Statistic inverted horizontal value={this.props.total} size="mini" color="green" label="words saved" /></Menu.Item>
+            <Menu.Item position="right"><Statistic inverted horizontal value={this.props.total} size="mini" color="green" label="words saved" /></Menu.Item>
             {/* <Statistic inverted horizontal value={this.props.total} size="mini" color="green" label="words saved" /> */}
           </Menu>
         </Segment>

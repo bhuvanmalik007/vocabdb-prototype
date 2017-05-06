@@ -37,7 +37,7 @@ CardsMaker.propTypes = {
 };
 
 const audio = () =>{
-  document.getElementById('bflat').play();
+  document.getElementById('audio').play();
 };
 
 const Explore = ({ search, searchResults, searchString, addWord, filterWords, updateSearchString, isLoading, resetGlobalSearchResults, pronounciation }) => {
@@ -50,7 +50,7 @@ const Explore = ({ search, searchResults, searchString, addWord, filterWords, up
   };
   return (
     <div className="main-container">
-      <audio id="bflat" src={pronounciation}/>
+      <audio id="audio" src={pronounciation}/>
       <Search
         size="big"
         onSearchChange={handleSearchChange}
