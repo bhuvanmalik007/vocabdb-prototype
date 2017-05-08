@@ -19,11 +19,12 @@ class Root extends Component {
       <Provider store={store}>
         <div>
           <ReduxToastr
-            timeOut={2500}
+            timeOut={2000}
             newestOnTop={false}
             position="top-center"
             transitionIn="bounceInDown"
             transitionOut="fadeOut"
+            showCloseButton= {true}
           />
           <Router history={history} routes={routes} />
         </div>

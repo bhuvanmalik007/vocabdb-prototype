@@ -27,6 +27,7 @@
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
   },
+  "homepage": "https://bhuvanmalik007.github.io/mission-admission",
   "author": "bhuvan malik",
   "license": "MIT",
   "dependencies": {

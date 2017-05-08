@@ -9,6 +9,7 @@ export default (dispatch, {message,type,title})=>{
     attention: true, // This will add a shadow like the confirm method.
     message,
     options: {},
-    progressBar: false
+    progressBar: false,
+    showCloseButton: true
   });
 };
