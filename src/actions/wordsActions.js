@@ -30,7 +30,7 @@ export function addWord(wordObj) {
   };
 }
 
-export function deleteWord(id, toastr) {
+export function deleteWord(id) {
   return (dispatch) => {
     fetch('http://mission-admission.herokuapp.com/mywords/delete/' + id, { method: 'delete' })
       .then(response => response.json())

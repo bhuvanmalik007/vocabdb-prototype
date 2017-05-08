@@ -5,19 +5,19 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 import PropTypes from 'prop-types';
 
-const CardsMaker = ({ searchResults, searchString, addWord, filterWords }) =>
+const CardsMaker = (props) =>
   <Card.Group itemsPerRow={2}>
-    {searchResults.map((element,id) =>
+    {props.searchResults.map((element,id) =>
       <Card key={id} className="animated fadeIn">
         <Card.Content>
           <Image floated="right">
             <Popup
-              trigger={<Icon  link name="plus" onClick={()=>{addWord({word:searchString,meaning:element.defenition,example:element.example});filterWords();}} />}
+              trigger={<Icon  link name="plus" onClick={()=>{props.addWord({word:props.searchString,meaning:element.defenition,example:element.example});props.filterWords();}} />}
               content="Add to My Flashcards"
             />
           </Image>
           <Card.Header>
-            {searchString}
+            {props.searchString}
           </Card.Header>
           <Card.Meta>
             {element.meaning}
@@ -40,13 +40,11 @@ const audio = () =>{
   document.getElementById('audio').play();
 };
 
-const Explore = ({ search, searchResults, searchString, addWord, filterWords, updateSearchString, isLoading, resetGlobalSearchResults, pronounciation }) => {
+const Explore = ({ search, searchResults, searchString, addWord, filterWords, updateSearchString, isLoading, setLoader, pronounciation }) => {
   const handleSearchChange  = (e, value) => {
+    setLoader();
     updateSearchString(value);
-    if(value.trim() != '') {
       search(value);
-    }
-    else resetGlobalSearchResults();
   };
   return (
     <div className="main-container">
@@ -79,8 +77,8 @@ Explore.propTypes = {
   filterWords: PropTypes.func,
   updateSearchString: PropTypes.func,
   isLoading: PropTypes.bool,
-  resetGlobalSearchResults: PropTypes.func,
-  pronounciation: PropTypes.string
+  pronounciation: PropTypes.string,
+  setLoader: PropTypes.func
 };
 
 
@@ -97,10 +95,9 @@ function mapDispatchToProps(dispatch) {
   return {
     updateSearchString: bindActionCreators(actions.updateGlobalSearchString, dispatch),
     search: bindActionCreators((searchString)=>({type:'PERFORM_GLOBAL_SEARCH',searchString}), dispatch),
-    // search: (searchString) => actions.globalSearch(searchString)(dispatch),
+    setLoader: bindActionCreators(()=>({type:'IS_LOADING',bool:true}), dispatch),
     addWord: (wordObj) => actions.addWord(wordObj)(dispatch),
     filterWords: bindActionCreators(actions.filterWords, dispatch),
-    resetGlobalSearchResults: bindActionCreators(actions.resetGlobalSearchResults, dispatch)
   };
 }
 

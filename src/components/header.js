@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Segment, Statistic, Label } from 'semantic-ui-react';
+import { Menu, Segment, Statistic } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link, IndexLink } from 'react-router';
 import { connect } from 'react-redux';

@@ -17,6 +17,7 @@ function configureStoreProd(initialState) {
     // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
     routerMiddleware(browserHistory),
     thunk,
+    createEpicMiddleware(rootEpic)
   ];
 
   return createStore(rootReducer, initialState, compose(
