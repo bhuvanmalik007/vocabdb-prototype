@@ -48,51 +48,6 @@ export function deleteWord(id) {
   };
 }
 
-export function filterWords(searchString) {
-  return {
-    type: types.FILTER_WORDS,
-    searchString
-  };
-}
-
-export function updateGlobalSearchString(searchString) {
-  return {
-    type: types.UPDATE_GLOBAL_SEARCH_STRING,
-    searchString
-  };
-}
-
-export function globalSearch(searchString) {
-  return (dispatch) => {
-    dispatch({
-        type: types.IS_LOADING,
-        bool: true
-      }) &&
-      fetch('http://mission-admission.herokuapp.com/globalsearch/' + searchString.trim(), {
-        method: 'get'
-      })
-      .then(response => response.json())
-      .then(results => {
-        dispatch({
-            type: types.IS_LOADING,
-            bool: false
-          }) &&
-          dispatch({
-            type: types.GLOBAL_SEARCH,
-            results,
-            searchString
-          });
-      })
-      .catch(function(err) {
-        console.log(err);
-        dispatch({
-          type: types.IS_LOADING,
-          bool: false
-        });
-      });
-  };
-}
-
 export function changeLoadingState(bool) {
   return {
     type: types.IS_LOADING,
@@ -119,10 +74,4 @@ export function initState() {
         });
       });
   };
-}
-
-export function resetGlobalSearchResults() {
-  return {
-    type: types.RESET_GLOBAL_SEARCH
-  }
 }

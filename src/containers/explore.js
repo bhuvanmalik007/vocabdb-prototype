@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Segment, Icon, Image, Search, Popup } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 import PropTypes from 'prop-types';
 
@@ -36,15 +35,15 @@ CardsMaker.propTypes = {
   filterWords: PropTypes.func
 };
 
-const audio = () =>{
+const audio = () => {
   document.getElementById('audio').play();
 };
 
 const Explore = ({ search, searchResults, searchString, addWord, filterWords, updateSearchString, isLoading, setLoader, pronounciation }) => {
-  const handleSearchChange  = (e, value) => {
+  const handleSearchChange = (e, value) => {
     setLoader();
     updateSearchString(value);
-      search(value);
+    search(value);
   };
   return (
     <div className="main-container">
@@ -93,11 +92,11 @@ function mapStateToProps({ globalSearchState }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateSearchString: bindActionCreators(actions.updateGlobalSearchString, dispatch),
-    search: bindActionCreators((searchString)=>({type:'PERFORM_GLOBAL_SEARCH',searchString}), dispatch),
-    setLoader: bindActionCreators(()=>({type:'IS_LOADING',bool:true}), dispatch),
+    updateSearchString: (searchString) => dispatch({ type: 'UPDATE_GLOBAL_SEARCH_STRING', searchString }),
+    search: (searchString) => dispatch({ type: 'PERFORM_GLOBAL_SEARCH', searchString }),
+    setLoader: () => dispatch({ type: 'IS_LOADING', bool: true }),
     addWord: (wordObj) => actions.addWord(wordObj)(dispatch),
-    filterWords: bindActionCreators(actions.filterWords, dispatch),
+    filterWords: (searchString) => dispatch({ type: 'FILTER_WORDS', searchString })
   };
 }
 

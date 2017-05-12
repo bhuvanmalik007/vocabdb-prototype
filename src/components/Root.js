@@ -24,8 +24,7 @@ class Root extends Component {
             position="top-center"
             transitionIn="bounceInDown"
             transitionOut="fadeOut"
-            showCloseButton= {true}
-          />
+            showCloseButton= {true} />
           <Router history={history} routes={routes} />
         </div>
       </Provider>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Segment, Icon, Image, Search, Popup } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as actions from '../actions/wordsActions';
 import PropTypes from 'prop-types';
 import '../styles/styles.scss';
@@ -88,7 +87,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     deleteWord: (id) => actions.deleteWord(id)(dispatch),
-    filterWords: bindActionCreators(actions.filterWords, dispatch)
+    filterWords: (searchString) => dispatch({ type: 'FILTER_WORDS', searchString })
   };
 }
 
