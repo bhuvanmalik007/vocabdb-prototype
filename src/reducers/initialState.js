@@ -5,8 +5,7 @@ export default {
     searchString: '',
     isLoading: true,
     total: 0,
-    multipleSelect: false,
-    selectedIds:[]
+    multipleSelect: false
   },
   globalSearchState: { results: { words: [] }, searchString: '', isLoading: false },
   toastrState: {}

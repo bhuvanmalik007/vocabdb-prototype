@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable';
+// import IP from '../futils/identitypromise';
 
 const fetchWords = wordsArray => {
   const request = fetch('http://mission-admission.herokuapp.com/globalsearch/multiple', {

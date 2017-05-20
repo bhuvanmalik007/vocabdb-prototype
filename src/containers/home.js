@@ -11,15 +11,12 @@ const searchGoogle = (word) => {
   window.open('http://www.google.com/search?q=' + word, '_blank');
 }
 
-// const indexFinder = (index)=>{
-//
-// }
 
-const CardsMaker = ({ deleteWord, wordsArray, multipleSelect, pushSelectedId, selectedIds }) =>
+const CardsMaker = ({ deleteWord, wordsArray, multipleSelect, select }) =>
   <Card.Group itemsPerRow={4}>
     {wordsArray.map((element,index) =>
       <Card key={index} className="animated fadeIn" link={multipleSelect} >
-        <Card.Content onClick={()=>{multipleSelect && pushSelectedId(element._id);}}>
+        <Card.Content onClick={()=>{multipleSelect && select(index);}}>
           <Image floated="right">
             {!multipleSelect && <div>
               <Popup
@@ -29,7 +26,7 @@ const CardsMaker = ({ deleteWord, wordsArray, multipleSelect, pushSelectedId, se
                 trigger={<Icon link name="close" onClick={()=>deleteWord(element._id)} />}
                 content="Delete Flashcard from your saved collection"/>
             </div>}
-            {selectedIds.find(id=>id==element._id) && <Icon link name="checkmark" />}
+            {multipleSelect && element.hasOwnProperty('selected') && element.selected && <Icon link name="checkmark" />}
           </Image>
           <Card.Header>
             {element.word}
@@ -48,8 +45,7 @@ CardsMaker.propTypes = {
   deleteWord: PropTypes.func,
   wordsArray: PropTypes.array,
   multipleSelect: PropTypes.bool,
-  pushSelectedId: PropTypes.func,
-  selectedIds: PropTypes.array
+  select: PropTypes.func
 }
 
 
@@ -61,8 +57,7 @@ const HomePage = ({
   isLoading,
   multipleSelect,
   toggleMultipleSelect,
-  pushSelectedId,
-  selectedIds
+  select
 }) => {
   let handleSearchChange = (e, value) => {
     filterWords(value);
@@ -85,7 +80,7 @@ const HomePage = ({
       <Segment basic>
         <CardsMaker deleteWord={deleteWord} wordsArray={wordsArray}
           searchString={searchString} filter = {filterWords} multipleSelect = {multipleSelect}
-          pushSelectedId={pushSelectedId} selectedIds={selectedIds}/>
+          select={select}/>
       </Segment>
     </div>
   )
@@ -99,8 +94,7 @@ HomePage.propTypes = {
   isLoading: PropTypes.bool,
   multipleSelect: PropTypes.bool,
   toggleMultipleSelect: PropTypes.func,
-  pushSelectedId: PropTypes.func,
-  selectedIds: PropTypes.array
+  select: PropTypes.func
 }
 
 function mapStateToProps(state) {
@@ -108,8 +102,7 @@ function mapStateToProps(state) {
     wordsArray: state.wordsState.filteredArray,
     searchString: state.wordsState.searchString,
     isLoading: state.wordsState.isLoading,
-    multipleSelect: state.wordsState.multipleSelect,
-    selectedIds: state.wordsState.selectedIds
+    multipleSelect: state.wordsState.multipleSelect
   };
 }
 
@@ -118,7 +111,7 @@ function mapDispatchToProps(dispatch) {
     deleteWord: (id) => actions.deleteWord(id)(dispatch),
     filterWords: (searchString) => dispatch({ type: 'FILTER_WORDS', searchString }),
     toggleMultipleSelect: () => dispatch({ type: 'TOGGLE_MULTIPLE_SELECT' }),
-    pushSelectedId: (id) => dispatch({ type: 'ADD_SELECTED_ID', id })
+    select: (index) => dispatch({ type: 'SELECT', index })
   };
 }
 
