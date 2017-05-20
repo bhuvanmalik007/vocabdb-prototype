@@ -20,7 +20,15 @@ const actionHandlers = {
   FILTER_WORDS: (state, action) => Object.assign({}, state, {
     filteredArray: state.wordsArray.filter(element => element.word.search(action.searchString) > -1),
     searchString: action.searchString,
-  })
+  }),
+  ADD_MULTIPLE_WORDS: (state,action)=>Object.assign({}, state, {
+    wordsArray: [...action.wordsArray, ...state.wordsArray],
+    filteredArray: [...action.wordsArray, ...state.wordsArray],
+    total: state.total + action.wordsArray.length
+  }),
+  TOGGLE_MULTIPLE_SELECT: (state) => Object.assign({},state, {multipleSelect:!state.multipleSelect, selectedIds:[]}),
+  ADD_SELECTED_ID: (state,action) => Object.assign({},state, {selectedIds:[...state.selectedIds, action.id]})
+
 };
 
 export default createreducer(initialState.wordsState, actionHandlers);

@@ -16,7 +16,7 @@ export function addWord(wordObj) {
       .then(result => result.json())
       .then(({ success, data }) => {
         if (success) {
-          toastrservice(dispatch,{type:'success',title:'Flashcard added successfully'});
+          toastrservice(dispatch, { type: 'success', title: 'Flashcard added successfully' });
           dispatch({
             type: types.ADD_WORD,
             wordObj: data.wordObj
@@ -39,7 +39,7 @@ export function deleteWord(id) {
           type: types.DELETE_WORD,
           id
         });
-        toastrservice(dispatch,{type:'success',title:'Flashcard deleted Successfully'});
+        toastrservice(dispatch, { type: 'success', title: 'Flashcard deleted Successfully' });
       })
       .catch(err => {
         console.log(err);

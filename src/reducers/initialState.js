@@ -1,11 +1,13 @@
 export default {
   wordsState: {
-    wordsArray:[],
+    wordsArray: [],
     filteredArray: [],
     searchString: '',
     isLoading: true,
-    total: 0
+    total: 0,
+    multipleSelect: false,
+    selectedIds:[]
   },
-  globalSearchState: { results: {words:[]}, searchString: '', isLoading: false },
-  toastrState:{}
+  globalSearchState: { results: { words: [] }, searchString: '', isLoading: false },
+  toastrState: {}
 };

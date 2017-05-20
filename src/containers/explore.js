@@ -11,7 +11,7 @@ const CardsMaker = (props) =>
         <Card.Content>
           <Image floated="right">
             <Popup
-              trigger={<Icon  link name="plus" onClick={()=>{props.addWord({word:props.searchString,meaning:element.defenition,example:element.example});props.filterWords();}} />}
+              trigger={<Icon  link name="plus" onClick={()=>{props.addWord({word:props.searchString,meaning:element.meaning,example:element.example});props.filterWords();}} />}
               content="Add to My Flashcards"
             />
           </Image>
